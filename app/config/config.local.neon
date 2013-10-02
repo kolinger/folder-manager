@@ -1,9 +1,0 @@
-parameters:
-	root: %appDir%/../../
-	webRoot: 'http://localhost/'
-	defaults:
-		path: /
-		sort: name
-		sortType: asc
-	ignoreHiddenFiles: false
-	useHttps: false
