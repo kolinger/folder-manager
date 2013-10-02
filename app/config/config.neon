@@ -13,6 +13,7 @@ common:
 			sort: name
 			sortType: asc
 		ignoreHiddenFiles: false
+		useHttps: false
 
 	php:
 		date.timezone: Europe/Prague

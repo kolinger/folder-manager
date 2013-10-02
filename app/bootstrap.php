@@ -15,9 +15,12 @@ $configurator->createRobotLoader()
 	->addDirectory(__DIR__ . '/../libs')
 	->register();
 
-$configurator->addConfig(__DIR__ . '/config.neon');
+$configurator->addConfig(__DIR__ . '/config/config.neon');
+$configurator->addConfig(__DIR__ . '/config/config.local.neon', $configurator::NONE);
 $container = $configurator->createContainer();
 
-$container->router[] = new Route('<presenter>[/<action>][/<id>]', 'List:default');
+
+$flags = $container->parameters['useHttps'] ? Route::SECURED : 0;
+$container->router[] = new Route('<presenter>[/<action>][/<id>]', 'List:default', $flags);
 
 return $container;
