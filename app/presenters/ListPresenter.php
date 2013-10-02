@@ -13,19 +13,19 @@ class ListPresenter extends Presenter
 	 * @var string
 	 * @persistent
 	 */
-	public $path;
+	public $path = '/';
 
 	/**
 	 * @var string
 	 * @persistent
 	 */
-	public $sort;
+	public $sort = 'date';
 
 	/**
 	 * @var string
 	 * @persistent
 	 */
-	public $sortType;
+	public $sortType = 'desc';
 
 	/**
 	 * @var DirectoryFacade
@@ -60,18 +60,6 @@ class ListPresenter extends Presenter
 	public function startup()
 	{
 		parent::startup();
-
-		$defaults = $this->context->parameters['defaults'];
-		if ($this->path === NULL) {
-			$this->path = $defaults['path'];
-		}
-		if ($this->sort === NULL) {
-			$this->sort = $defaults['sort'];
-		}
-		if ($this->sortType === NULL) {
-			$this->sortType = $defaults['sortType'];
-		}
-
 		$this->root = $this->context->parameters['root'];
 		$this->webRoot = $this->context->parameters['webRoot'];
 		$this->ignoreHiddenFiles = $this->context->parameters['ignoreHiddenFiles'];

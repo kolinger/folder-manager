@@ -19,6 +19,14 @@ $configurator->addConfig(__DIR__ . '/config/config.neon');
 $configurator->addConfig(__DIR__ . '/config/config.local.neon', $configurator::NONE);
 $container = $configurator->createContainer();
 
+$defaults = $container->parameters['defaults'];
+$metadata = array(
+	'presenter' => 'List',
+	'action' => 'default',
+	'sort' => $defaults['sort'],
+	'sortType' => $defaults['sortType'],
+	'path' => $defaults['path'],
+);
 
 $flags = $container->parameters['useHttps'] ? Route::SECURED : 0;
 $container->router[] = new Route('<presenter>[/<action>][/<id>]', 'List:default', $flags);
