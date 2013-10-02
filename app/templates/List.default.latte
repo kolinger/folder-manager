@@ -1,0 +1,71 @@
+{block title}{$path}{/block}
+{block content}
+	<p>
+		<a n:href="this, path => $presenter->getBackPath()" n:class="btn, btn-primary, $inRoot ? disabled">
+			<span class="glyphicon glyphicon-arrow-left"></span> Back
+		</a>
+		<a href="#upload" class="btn btn-primary"  data-toggle="modal">Upload new file</a>
+	</p>
+
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>
+					<a n:href="this, sort => name, sortType => $presenter->getSortType(name)">Name</a>
+				</th>
+				<th>
+					<a n:href="this, sort => date, sortType => $presenter->getSortType(date)">Date</a>
+				</th>
+				<th>
+					<a n:href="this, sort => size, sortType => $presenter->getSortType(size)">Size</a>
+				</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr n:foreach="$items as $item">
+				<td>
+					{if $item->isDir()}
+						<a n:href="this, path => $presenter->getItemPath($item)">{$item->getFileName()}</a>
+					{else}
+						<a href="{$presenter->getFilePath($item)}">{$item->getFileName()}</a>
+					{/if}
+				</td>
+				<td>
+					{$item->getCTime()|date:'j.n.Y H:i'}
+				</td>
+				<td>
+					{if $item->isDir()}
+						-
+					{else}
+						{$item->getSize()}
+					{/if}
+				</td>
+				<td>
+					<a n:href="delete, item => $item->getFileName()" class="btn btn-danger"
+					   data-confirm-question="{$presenter->getDeleteConfirmMessage($item)}">Delete</a>
+					<a href="{$presenter->getFilePath($item)}" class="btn btn-primary" n:if="$item->isDir()">Direct</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<div class="modal fade" id="upload" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				{form form}
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title">Upload</h4>
+					</div>
+					<div class="modal-body">
+						{input file}
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						{input upload, class => 'btn btn-primary'}
+					</div>
+				{/form}
+			</div>
+		</div>
+	</div>
