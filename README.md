@@ -12,11 +12,24 @@ Usage
 
 Example nginx configuration (with http auth protection)
 -------------------------------------------------------
-??
+    location /manager/ {
+      auth_basic "manager";
+      auth_basic_user_file /path/to/.htpasswd;
+      
+      alias /path/to/www/folder/;
+      try_files $uri $uri/ /manager/index.php?$args;
+        
+      location ~ \.php$ {
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        fastcgi_pass 127.0.0.1:9000;
+        fastcgi_index index.php;
+        include fastcgi_params;
+      }
+    }
+
 
 TODO
 ----
-- nginx configuration
 - rename/move
 - user-friendly size
 - .htaccess configuraiton
