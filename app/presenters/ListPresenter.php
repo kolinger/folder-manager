@@ -91,7 +91,7 @@ class ListPresenter extends Presenter
 	/**
 	 * @param string $item
 	 */
-	public function actionDelete($item)
+	public function handleDelete($item)
 	{
 		$object = realpath($this->root . DIRECTORY_SEPARATOR . $this->path . DIRECTORY_SEPARATOR . $item);
 		$isDir = is_dir($object);

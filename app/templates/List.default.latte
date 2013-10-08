@@ -42,7 +42,7 @@
 					{/if}
 				</td>
 				<td>
-					<a n:href="delete, item => $item->getFileName()" class="btn btn-danger"
+					<a n:href="delete!, item => $item->getFileName()" class="btn btn-danger"
 					   data-confirm-question="{$presenter->getDeleteConfirmMessage($item)}">Delete</a>
 					<a href="{$presenter->getFilePath($item)}" class="btn btn-primary" n:if="$item->isDir()">Direct</a>
 				</td>
